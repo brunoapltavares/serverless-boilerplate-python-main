@@ -1,0 +1,23 @@
+{
+  "name": "serverless-boilerplate-python",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": ". ./.venv/bin/activate && sls offline --stage dev --noPrependStageInUrl --reloadHandler",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^3.26.0",
+    "serverless-better-credentials": "^1.1.3",
+    "serverless-offline": "^12.0.4",
+    "serverless-python-requirements": "^6.0.0"
+  }
+}

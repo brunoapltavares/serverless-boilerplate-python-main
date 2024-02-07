@@ -1,0 +1,45 @@
+service: Serverless-Boilerplate-Python
+package:
+  individually: true
+  patterns:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!.venv/**'
+    - '!terraform/**'
+    - '!package-lock.json'
+    - '!package.json'
+    - '!requirements.txt'
+    - '!README.md'
+    - '!poetry.lock'
+    - '!pyproject.toml'
+provider:
+  name: aws
+  region: "us-east-1"
+  profile: ${self:custom.profile}
+  stage: ${opt:stage, "dev"}
+  runtime: python3.9
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-better-credentials
+
+custom:
+  profile: 'default'
+  pythonRequirements:
+    dockerizePip: true
+    usePoetry: true
+
+
+functions:
+  app:
+    handler: serverless_boilerplate_python.app.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    events:
+      - http:
+          method: get
+          path: /
+      - http:
+          method: any
+          path: /{proxy+}
